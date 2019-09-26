@@ -17,8 +17,7 @@ module.exports = function(sequelize, DataTypes) {
       }
     },
     teamName: {
-      type: DataTypes.STRING,
-      allowNull: false
+      type: DataTypes.STRING
     }
   });
   //Method for checking unhashed password with hashed one for validation
