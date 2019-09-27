@@ -30,25 +30,38 @@ module.exports = function(app) {
     res.redirect("/");
   });
 
-  app.get("/api/examples", function(req, res) {
-    db.Example.findAll({}).then(function(dbExamples) {
-      res.json(dbExamples);
+  //api call to get table of players
+  app.get("/api/roster", function(req, res) {
+    db.fbRoster.findAll({}).then(function(roster) {
+      res.json(roster);
+      //res.render(handlebars for table of players)
     });
   });
 
   // Create a new example
-  app.post("/api/examples", function(req, res) {
-    db.Example.create(req.body).then(function(dbExample) {
-      res.json(dbExample);
+  app.post("/api/roster", function(req, res) {
+    db.fbRoster.create(req.body).then(function(player) {
+      res.json(player);
     });
   });
 
-  // Delete an example by id
-  app.delete("/api/examples/:id", function(req, res) {
-    db.Example.destroy({ where: { id: req.params.id } }).then(function(
-      dbExample
-    ) {
-      res.json(dbExample);
+  // Delete a player
+  app.delete("/api/roster/:playerID", function(req, res) {
+    db.fbRoster
+      .destroy({
+        where: { id: req.params.playerID }
+      })
+      .then(function(player) {
+        res.json(player);
+      });
+  });
+
+  // Delete a User
+  app.delete("/api/user/:userID", function(req, res) {
+    db.User.destroy({
+      where: { id: req.params.userID }
+    }).then(function(player) {
+      res.json(player);
     });
   });
 };
