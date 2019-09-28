@@ -14,7 +14,8 @@ module.exports = function(app) {
   app.post("/api/signup", function(req, res) {
     db.User.create({
       username: req.body.username,
-      password: req.body.password
+      password: req.body.password,
+      email: req.body.email
     })
       .then(function() {
         res.redirect(307, "/api/login");
@@ -63,5 +64,19 @@ module.exports = function(app) {
     }).then(function(player) {
       res.json(player);
     });
+  });
+
+  //get call where axios makes a call on page load
+  app.get("/api/rostersuggestion", function(req, res) {
+    //axios call goes here of 10 to 15 players
+    //after the .then res.render to page where table query will show
+    res.status(201).end();
+  });
+
+  //get call for query where axios will make call based on user query
+  app.get("/api/players", function(req, res) {
+    //axios call here for the query
+    //.then empty the div with player suggestions and now append searched players
+    res.status(201).end();
   });
 };
