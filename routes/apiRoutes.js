@@ -65,4 +65,18 @@ module.exports = function(app) {
       res.json(player);
     });
   });
+
+  //get call where axios makes a call on page load
+  app.get("/api/rostersuggestion", function(req, res) {
+    //axios call goes here of 10 to 15 players
+    //after the .then res.render to page where table query will show
+    res.status(201).end();
+  });
+
+  //get call for query where axios will make call based on user query
+  app.get("/api/players", function(req, res) {
+    //axios call here for the query
+    //.then empty the div with player suggestions and now append searched players
+    res.status(201).end();
+  });
 };
