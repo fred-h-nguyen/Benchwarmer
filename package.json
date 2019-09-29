@@ -1,5 +1,5 @@
 {
-  "name": "node-handlebars-boilerplate",
+  "name": "handlebars-boilerplate",
   "version": "1.0.0",
   "description": "Project 2 Starter",
   "main": "server.js",
@@ -11,11 +11,13 @@
   },
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.19.0",
     "bcryptjs": "^2.4.3",
     "dotenv": "^8.0.0",
     "express": "^4.17.0",
     "express-handlebars": "^3.1.0",
     "express-session": "^1.16.2",
+    "mysportsfeeds-node": "^2.0.1",
     "mysql2": "^1.6.5",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
@@ -30,5 +32,14 @@
     "eslint-plugin-prettier": "^3.1.0",
     "mocha": "^6.1.4",
     "prettier": "^1.17.1"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fred-h-nguyen/Project-2.git"
+  },
+  "author": "",
+  "bugs": {
+    "url": "https://github.com/fred-h-nguyen/Project-2/issues"
+  },
+  "homepage": "https://github.com/fred-h-nguyen/Project-2#readme"
 }
