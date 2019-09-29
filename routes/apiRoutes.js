@@ -1,6 +1,11 @@
 //required models and passport for api routes
 var db = require("../models");
 var passport = require("../config/passport");
+var axios = require("axios");
+var key = require("./key");
+var MySportsFeeds = require("mysportsfeeds-node");
+var msf = new MySportsFeeds("1.2", true, null);
+msf.authenticate(key.sportsDataAPI.apiKey, key.sportsDataAPI.code);
 
 module.exports = function(app) {
   // Get all examples
@@ -66,10 +71,33 @@ module.exports = function(app) {
     });
   });
 
-  //get call where axios makes a call on page load
+  //get call where mysportsfeeds-node makes a call on page load
   app.get("/api/rostersuggestion", function(req, res) {
-    //axios call goes here of 10 to 15 players
+    //mysportsfeeds-node call goes here of 15 players
     //after the .then res.render to page where table query will show
+
+    msf
+      .getData("nfl", "current", "active_players", "json", {
+        sort: "player.lastname",
+        limit: "15"
+      })
+      .then(function(response) {
+        var playerData = response.activeplayers.playerentry;
+
+        for (i = 0; i < playerData.length; i++) {
+          console.log(
+            "player_name: " +
+              playerData[i].player.FirstName +
+              " " +
+              playerData[i].player.LastName +
+              "\r\n" +
+              "Position: " +
+              playerData[i].player.Position +
+              "\r\n"
+          );
+        }
+      });
+
     res.status(201).end();
   });
 
