@@ -75,15 +75,15 @@ module.exports = function(app) {
   app.get("/api/rostersuggestion", function(req, res) {
     //mysportsfeeds-node call goes here of 15 players
     //after the .then res.render to page where table query will show
-
+//This is a call for Quarter Backs
     msf
-      .getData("nfl", "current", "active_players", "json", {
+      .getData("nfl", "current", "cumulative_player_stats", "json", {
         sort: "player.lastname",
-        limit: "15"
+        limit: "15",
+        position: "qb"
       })
       .then(function(response) {
-        var playerData = response.activeplayers.playerentry;
-
+        var playerData = response.cumulativeplayerstats.playerstatsentry;
         for (i = 0; i < playerData.length; i++) {
           console.log(
             "player_name: " +
@@ -93,7 +93,26 @@ module.exports = function(app) {
               "\r\n" +
               "Position: " +
               playerData[i].player.Position +
+              "\r\n" +
+              "Games: " +
+              playerData[i].stats.GamesPlayed["#text"] +
+              "\r\n" +
+              "Pass Yards: " +
+              playerData[i].stats.PassYards["#text"] +
+              "\r\n" +
+              "Pass Attempts: " +
+              playerData[i].stats.PassAttempts["#text"] +
+              "\r\n" +
+              "Pass Completions: " +
+              playerData[i].stats.PassCompletions["#text"] +
+              "\r\n" +
+              "Pass Percentage: " +
+              playerData[i].stats.PassPct["#text"] +
+              "\r\n" +
+              "QB Rating: " +
+              playerData[i].stats.PassPct["#text"] +
               "\r\n"
+            
           );
         }
       });
