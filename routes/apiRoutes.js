@@ -1,7 +1,7 @@
 //required models and passport for api routes
 var db = require("../models");
 var passport = require("../config/passport");
-var axios = require("axios");
+//var axios = require("axios");
 var key = require("./key");
 var MySportsFeeds = require("mysportsfeeds-node");
 var msf = new MySportsFeeds("1.2", true, null);
@@ -75,7 +75,7 @@ module.exports = function(app) {
   app.get("/api/rostersuggestion", function(req, res) {
     //mysportsfeeds-node call goes here of 15 players
     //after the .then res.render to page where table query will show
-//This is a call for Quarter Backs
+    //This is a call for Quarter Backs
     msf
       .getData("nfl", "current", "cumulative_player_stats", "json", {
         sort: "player.lastname",
@@ -112,7 +112,6 @@ module.exports = function(app) {
               "QB Rating: " +
               playerData[i].stats.PassPct["#text"] +
               "\r\n"
-            
           );
         }
       });
