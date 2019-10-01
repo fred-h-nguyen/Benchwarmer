@@ -80,39 +80,43 @@ module.exports = function(app) {
       .getData("nfl", "current", "cumulative_player_stats", "json", {
         sort: "player.lastname",
         limit: "15",
-        position: "qb"
+        position: "qb,rb,fb,wr,te"
       })
       .then(function(response) {
         var playerData = response.cumulativeplayerstats.playerstatsentry;
+
         for (i = 0; i < playerData.length; i++) {
-          console.log(
-            "player_name: " +
+          var playerDataStats = {
+            ID: playerData[i].player.ID,
+            PlayerName:
               playerData[i].player.FirstName +
               " " +
-              playerData[i].player.LastName +
-              "\r\n" +
-              "Position: " +
-              playerData[i].player.Position +
-              "\r\n" +
-              "Games: " +
-              playerData[i].stats.GamesPlayed["#text"] +
-              "\r\n" +
-              "Pass Yards: " +
-              playerData[i].stats.PassYards["#text"] +
-              "\r\n" +
-              "Pass Attempts: " +
-              playerData[i].stats.PassAttempts["#text"] +
-              "\r\n" +
-              "Pass Completions: " +
-              playerData[i].stats.PassCompletions["#text"] +
-              "\r\n" +
-              "Pass Percentage: " +
-              playerData[i].stats.PassPct["#text"] +
-              "\r\n" +
-              "QB Rating: " +
-              playerData[i].stats.PassPct["#text"] +
-              "\r\n"
-          );
+              playerData[i].player.LastName,
+            Position: playerData[i].player.Position,
+            TeamName: playerData[i].team.Name,
+            GamesPlayed: playerData[i].stats.GamesPlayed["#text"],
+            PassAttempts: playerData[i].stats.PassAttempts["#text"],
+            PassCompletions: playerData[i].stats.PassCompletions["#text"],
+            PassPct: playerData[i].stats.PassPct["#text"],
+            PassYards: playerData[i].stats.PassYards["#text"],
+            PassTD: playerData[i].stats.PassTD["#text"],
+            PassTDPct: playerData[i].stats.PassTDPct["#text"],
+            RushAttempts: playerData[i].stats.RushAttempts["#text"],
+            RushYards: playerData[i].stats.RushYards["#text"],
+            RushAverage: playerData[i].stats.RushAverage["#text"],
+            RushTD: playerData[i].stats.RushTD["#text"],
+            RushFumbles: playerData[i].stats.RushFumbles["#text"],
+            Receptions: playerData[i].stats.Receptions["#text"],
+            RecYards: playerData[i].stats.RecYards["#text"],
+            RecAverage: playerData[i].stats.RecAverage["#text"],
+            RecTD: playerData[i].stats.RecTD["#text"],
+            Sacks: playerData[i].stats.Sacks["#text"],
+            TackleSolo: playerData[i].stats.TackleSolo["#text"],
+            Interceptions: playerData[i].stats.Interceptions["#text"],
+            IntTD: playerData[i].stats.IntTD["#text"],
+            IntYds: playerData[i].stats.IntYds["#text"]
+          };
+          console.log(playerDataStats);
         }
       });
 
