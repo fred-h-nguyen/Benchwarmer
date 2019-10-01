@@ -1,10 +1,46 @@
-//1. make a ajax post to /api/signup on submit button clickget information for the new user
-//$(submit button id).on("click",function(event){
-// event.preventDefault();
-//2.use jquery $(id of the form field).val.trim for username and email
-// var newUser ={of the info we got username:username, password:password,email:email}
-// write an if statement if any of the fields are empty in newUser then tell user must fill out rest of form and return
-//$.post("/api/signup,newUser)
-//}).then(function(data){
-//  window.location.replace("ourhomepage url")
-//})
+$(document).ready(function() {
+  // Getting references to our form and input
+  var signUpForm = $("form.signup");
+  var username = $("input#signupusername");
+  var password = $("input#password");
+  var email = $("input#email");
+
+  // When the signup button is clicked, we validate the email and password are not blank
+  signUpForm.on("click", function(event) {
+    event.preventDefault();
+    var userData = {
+      username: username.val().trim(),
+      email: email.val().trim(),
+      password: password.val().trim()
+    };
+
+    if (!userData.email || !userData.password || !userData.username) {
+      return;
+    }
+    // If we have an email and password, run the signUpUser function
+    signUpUser(userData.email, userData.password, userData.username);
+    email.val("");
+    password.val("");
+    username.val("");
+  });
+
+  // Does a post to the signup route. If successful, we are redirected to the members page
+  // Otherwise we log any errors
+  function signUpUser(email, password, username) {
+    $.post("/api/signup", {
+      email: email,
+      password: password,
+      username: username
+    })
+      .then(function() {
+        window.location.replace("/");
+        // If there's an error, handle it by throwing up a bootstrap alert
+      })
+      .catch(handleLoginErr);
+  }
+
+  function handleLoginErr(err) {
+    $("#alert .msg").text(err.responseJSON);
+    $("#alert").fadeIn(500);
+  }
+});
