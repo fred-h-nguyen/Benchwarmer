@@ -1,3 +1,25 @@
 .list-group-item {
   line-height: 2.5;
 }
+body {
+  background-image: url(../image/footballbgimage.jpg);
+  background-size: 100%;
+}
+
+  .nav-link {
+  
+  color: #f2f2f2;
+ 
+}
+.nav {
+  text-align: end;
+}
+
+.btn {
+  color: #f2f2f2
+}
+
+#nav-bar{ 
+  width: 100%;
+  margin-top: 1em;
+}
