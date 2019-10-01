@@ -6,11 +6,12 @@ body {
   background-size: 100%;
 }
 
-  .nav-link {
+.nav-link {
   
   color: #f2f2f2;
  
 }
+
 .nav {
   text-align: end;
 }
@@ -23,3 +24,11 @@ body {
   width: 100%;
   margin-top: 1em;
 }
+
+.signup {
+  background-color: rgba(255,255,255,0.6);
+  padding: 1em;
+  width: 100%;
+  margin-top: 2em;
+}
+
