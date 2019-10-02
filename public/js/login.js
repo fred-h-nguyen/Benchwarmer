@@ -13,7 +13,7 @@ $(document).ready(function() {
       username: user.username,
       password: user.password
     }).then(function() {
-      window.location.reload();
+      window.location.replace("/");
     });
   });
 
