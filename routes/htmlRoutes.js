@@ -13,7 +13,9 @@ module.exports = function(app) {
 
   //Load signup page
   app.get("/signup", function(req, res) {
-    res.render("signup");
+    res.render("signup", {
+      logged: false
+    });
   });
 
   // Load example page and pass in an example by id
