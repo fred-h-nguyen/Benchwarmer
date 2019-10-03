@@ -1,99 +1,83 @@
-// Get references to page elements
-var $exampleText = $("#example-text");
-var $exampleDescription = $("#example-description");
-var $submitBtn = $("#submit");
-var $exampleList = $("#example-list");
-
-// The API object contains methods for each kind of request we'll make
-var API = {
-  saveExample: function(example) {
-    return $.ajax({
-      headers: {
-        "Content-Type": "application/json"
-      },
-      type: "POST",
-      url: "api/examples",
-      data: JSON.stringify(example)
-    });
-  },
-  getExamples: function() {
-    return $.ajax({
-      url: "api/examples",
-      type: "GET"
-    });
-  },
-  deleteExample: function(id) {
-    return $.ajax({
-      url: "api/examples/" + id,
-      type: "DELETE"
-    });
+$(document).ready(function() {
+  var tbody = $("#suggestTable");
+  function renderTable(data) {
+    for (var i = 0; i < data.length; i++) {
+      var player = data[i].player;
+      var stat = data[i].stats;
+      var tr = $("<tr>");
+      var name = $("<td>");
+      var position = $("<td>");
+      var games = $("<td>");
+      var passYds = $("<td>");
+      var rushYds = $("<td>");
+      var receptions = $("<td>");
+      var tackleSolo = $("<td>");
+      var interceptions = $("<td>");
+      var add = $("<td>");
+      var btn = $("<button>");
+      btn.addClass("add btn");
+      btn.attr({
+        "data-player": player.FirstName + " " + player.LastName,
+        "data-position": player.Position,
+        "data-games": stat.GamesPlayed["#text"]
+      });
+      name.html(player.FirstName + " " + player.LastName);
+      position.html(player.Position);
+      games.html(stat.GamesPlayed["#text"]);
+      if (stat.PassYards) {
+        passYds.html(stat.PassYards["#text"]);
+        btn.attr({ "data-passYds": stat.PassYards["#text"] });
+      } else {
+        passYds.html("0");
+        btn.attr({ "data-passYds": "0" });
+      }
+      if (stat.RushYards) {
+        rushYds.html(stat.RushYards["#text"]);
+        btn.attr({ "data-rushYds": stat.RushYards["#text"] });
+      } else {
+        rushYds.html("0");
+        btn.attr({ "data-rushYds": "0" });
+      }
+      if (stat.Receptions) {
+        receptions.html(stat.Receptions["#text"]);
+        btn.attr({ "data-receptions": stat.Receptions["#text"] });
+      } else {
+        receptions.html("0");
+        btn.attr({ "data-receptions": "0" });
+      }
+      if (stat.TackleSolo) {
+        tackleSolo.html(stat.TackleSolo["#text"]);
+        btn.attr({ "data-tackles": stat.TackleSolo["#text"] });
+      } else {
+        tackleSolo.html("0");
+        btn.attr({ "data-tackles": "0" });
+      }
+      if (stat.Interceptions) {
+        interceptions.html(stat.Interceptions["#text"]);
+        btn.attr({ "data-interceptions": stat.Interceptions["#text"] });
+      } else {
+        interceptions.html("0");
+        btn.attr({ "data-interceptions": "0" });
+      }
+      btn.html("Add");
+      add.append(btn);
+      tr.append(
+        name,
+        position,
+        games,
+        passYds,
+        rushYds,
+        receptions,
+        tackleSolo,
+        interceptions,
+        add
+      );
+      tbody.append(tr);
+    }
   }
-};
 
-// refreshExamples gets new examples from the db and repopulates the list
-var refreshExamples = function() {
-  API.getExamples().then(function(data) {
-    var $examples = data.map(function(example) {
-      var $a = $("<a>")
-        .text(example.text)
-        .attr("href", "/example/" + example.id);
-
-      var $li = $("<li>")
-        .attr({
-          class: "list-group-item",
-          "data-id": example.id
-        })
-        .append($a);
-
-      var $button = $("<button>")
-        .addClass("btn btn-danger float-right delete")
-        .text("ｘ");
-
-      $li.append($button);
-
-      return $li;
-    });
-
-    $exampleList.empty();
-    $exampleList.append($examples);
+  $.ajax({ url: "/api/rostersuggestion", method: "GET" }).then(function(data) {
+    console.log(data);
+    renderTable(data);
   });
-};
-
-// handleFormSubmit is called whenever we submit a new example
-// Save the new example to the db and refresh the list
-var handleFormSubmit = function(event) {
-  event.preventDefault();
-
-  var example = {
-    text: $exampleText.val().trim(),
-    description: $exampleDescription.val().trim()
-  };
-
-  if (!(example.text && example.description)) {
-    alert("You must enter an example text and description!");
-    return;
-  }
-
-  API.saveExample(example).then(function() {
-    refreshExamples();
-  });
-
-  $exampleText.val("");
-  $exampleDescription.val("");
-};
-
-// handleDeleteBtnClick is called when an example's delete button is clicked
-// Remove the example from the db and refresh the list
-var handleDeleteBtnClick = function() {
-  var idToDelete = $(this)
-    .parent()
-    .attr("data-id");
-
-  API.deleteExample(idToDelete).then(function() {
-    refreshExamples();
-  });
-};
-
-// Add event listeners to the submit and delete buttons
-$submitBtn.on("click", handleFormSubmit);
-$exampleList.on("click", ".delete", handleDeleteBtnClick);
+});
