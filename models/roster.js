@@ -1,25 +1,20 @@
 module.exports = function(sequelize, Datatypes) {
   var fbRoster = sequelize.define("fbRoster", {
-    playerName: {
+    PlayerName: {
       type: Datatypes.STRING,
       allowNull: false
     },
-    position: {
+    Position: {
       type: Datatypes.STRING,
       allowNull: false
     },
-    positionType: {
-      type: Datatypes.STRING,
-      allowNull: false
-    },
-    gamesPlayed: Datatypes.INTEGER,
-    rushingYDS: Datatypes.INTEGER,
-    passingYDS: Datatypes.INTEGER,
-    tackles: Datatypes.INTEGER,
-    touchdowns: Datatypes.INTEGER,
-    interceptions: Datatypes.INTEGER,
-    sacks: Datatypes.INTEGER,
-    fieldGoals: Datatypes.INTEGER,
+    GamesPlayed: Datatypes.STRING,
+    PassYards: Datatypes.STRING,
+    QBRating: Datatypes.STRING,
+    RushYards: Datatypes.STRING,
+    Receptions: Datatypes.STRING,
+    TackleSolo: Datatypes.STRING,
+    Interceptions: Datatypes.STRING,
     ownerID: {
       type: Datatypes.INTEGER,
       allowNull: false
