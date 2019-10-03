@@ -1,6 +1,7 @@
 $(document).ready(function() {
   var tbody = $("#suggestTable");
   function renderTable(data) {
+    tbody.empty();
     for (var i = 0; i < data.length; i++) {
       var player = data[i].player;
       var stat = data[i].stats;
@@ -79,5 +80,33 @@ $(document).ready(function() {
   $.ajax({ url: "/api/rostersuggestion", method: "GET" }).then(function(data) {
     console.log(data);
     renderTable(data);
+  });
+
+  $(".submitBtn").on("click", function(event) {
+    event.preventDefault();
+
+    var playerSearch = $("#playerSearch")
+      .val()
+      .trim();
+    var season = $("#seasonSelect")
+      .find(":selected")
+      .val();
+    var position = $("#positionSelect")
+      .find(":selected")
+      .val();
+    var stat = $("#statSelect")
+      .find(":selected")
+      .val();
+
+    var url = "/api/players";
+    url += "?playerName=" + playerSearch + "&";
+    url += "season=" + season + "&";
+    url += "position=" + position + "&";
+    url += "stat=" + stat;
+
+    $.ajax({ url: url, method: "GET" }).then(function(data) {
+      console.log(data);
+      renderTable(data);
+    });
   });
 });

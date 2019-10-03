@@ -77,17 +77,17 @@ module.exports = function(app) {
     //after the .then res.render to page where table query will show
     //Updated data pull from mySportsFeeds.com:
 
-    function playerPull(season, position, sort) {
+    function playerPull(season, position, stat) {
       msf
         .getData("nfl", season, "cumulative_player_stats", "json", {
           limit: "15",
           position: position,
           force: true,
-          sort: "stats." + sort
+          sort: "stats." + stat
         })
         .then(function(response) {
           var playerData = response.cumulativeplayerstats.playerstatsentry;
-          console.log(playerData);
+          //console.log(playerData);
           res.json(playerData);
         });
     }
@@ -98,24 +98,23 @@ module.exports = function(app) {
   app.get("/api/players", function(req, res) {
     //axios call here for the query
     //.then empty the div with player suggestions and now append searched players
-    //var playername = req.query.playername
     var season = req.query.season;
     var position = req.query.position;
     var playerName = req.query.playerName;
-    var sort = req.query.sort;
+    var stat = req.query.stat;
     playerName = playerName.replace(/ /g, "-");
-
-    function playerPull(season, position, sort) {
+    console.log(req.query);
+    function playerPull(season, position, stat) {
       msf
         .getData("nfl", season, "cumulative_player_stats", "json", {
           limit: "15",
           position: position,
           force: true,
-          sort: "stats." + sort
+          sort: "stats." + stat
         })
         .then(function(response) {
           var playerData = response.cumulativeplayerstats.playerstatsentry;
-          console.log(playerData);
+          //console.log(playerData);
           res.json(playerData);
         });
     }
@@ -129,7 +128,7 @@ module.exports = function(app) {
         })
         .then(function(response) {
           var playerData = response.cumulativeplayerstats.playerstatsentry;
-          console.log(playerData);
+          //console.log(playerData);
           res.json(playerData);
         });
     }
@@ -137,7 +136,7 @@ module.exports = function(app) {
     if (playerName) {
       playerSpecific(playerName);
     } else {
-      playerPull(season, position, sort);
+      playerPull(season, position, stat);
     }
   });
 };
