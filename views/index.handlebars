@@ -90,8 +90,8 @@
     {{#if user}}
     {{#if roster}}
     <h2>{{user.teamName}}</h2>
-    <table class="table" id={{user.teamName}}>
-      <thead>
+    <table class="table table-sm table-striped table-bordered table-light">
+      <thead class="thead-dark">
         <tr>
           <th scope="col">Player</th>
           <th scope="col">Position</th>
@@ -104,7 +104,7 @@
           <th scope="col">Delete</th>
         </tr>
       </thead>
-      <tbody>
+      <tbody id={{user.teamName}}>
         {{#each roster}}
         <tr>{{this.PlayerName}}</tr>
         <tr>{{this.Position}}</tr>
