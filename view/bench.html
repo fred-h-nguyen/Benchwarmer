@@ -8,7 +8,7 @@
 
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-<link rel="stylesheet" href="../public/styles/styles.css">
+  <link rel="stylesheet" href="../public/styles/styles.css">
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
     integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
     crossorigin="anonymous"></script>
@@ -19,7 +19,7 @@
     integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
     crossorigin="anonymous"></script>
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
   <title>Benchwarmer Fantasy Football</title>
 
@@ -33,70 +33,88 @@
   <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
     <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
 
-        <button class="btn"><i class="fa fa-home"></i></button>
+      <button class="btn"><i class="fa fa-home"></i></button>
 
       <ul class="nav justify-content-end">
-          <li class="nav-item">
-            <a class="nav-link active" href="#">Log In</a>
-          </li>
-          
-        </ul>
-        
-          </div>
+        <li class="nav-item">
+          <a class="nav-link active" href="#">Log In</a>
+        </li>
+
+      </ul>
+
+    </div>
 
 
     </div>
-    
+
   </nav>
 
   <div class="container">
-      <div class="row">
-        <!-- a different bar with drop down menus for position, season, a searchbar for names, another drop 
+    <div class="row">
+      <!-- a different bar with drop down menus for position, season, a searchbar for names, another drop 
         down menu for something-->
-  
-        <!--div that will house a table of players that was searched-->
-        
-        <nav class="navbar navbar-light bg-dark" id="nav-bar">
-            <form class="form-inline">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-              </form>
-              <ul class="nav justify-content-end">
-                  <li class="nav-item">
-                    <a class="nav-link active" href="#">Position</a>
-                  </li>
-                  <li class="nav-item">
-                      <a class="nav-link active" href="#">Season</a>
-                    </li>
-                    
 
-                      <li class="nav-item dropdown">
-                          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                           Player Position
-                          </a>
-                          <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <a class="dropdown-item" href="#">QB</a>
-                            <a class="dropdown-item" href="#">RB</a>
-                            <a class="dropdown-item" href="#">WR</a>
-                            <a class="dropdown-item" href="#">TE</a>
-                            <a class="dropdown-item" href="#">Def</a>
-                          </div>
-                        </li>
-                </ul>
-            
-          </nav>
-  
-        <!--div that will house our roster table
+      <!--div that will house a table of players that was searched-->
+
+      <nav class="navbar navbar-light bg-dark" id="nav-bar">
+        <form class="form-inline">
+
+          <input class="form-control mr-sm-2" type="search" placeholder="Search Players" aria-label="Search">
+          <div class="selector">
+
+            <ul class="nav nav-right">
+              <li>
+                <div class="form-group" id="seasonFormSelect">
+
+                  <select class="form-control">
+                    <option>season</option>
+                    <option>2019</option>
+                    <option>2018</option>
+                    <option>2017</option>
+
+                  </select>
+                </div>
+              </li>
+              <li>
+                <div class="form-group" id="positionFormSelect">
+
+                  <select class="form-control">
+                    <option>Player Postion</option>
+                    <option>QB</option>
+                    <option>RB</option>
+                    <option>WR</option>
+                    <option>TE</option>
+                    <option>CB</option>
+                    <option>LB</option>
+                    <option>SS</option>
+                  </select>
+                </div>
+              </li>
+              <li class="nav-item submitBtn">
+
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+
+              </li>
+            </ul>
+          </div>
+        </form>
+      </nav>
+
+      <!--div that will house our roster table
         use of handlebars in this div
         {{#each player}}
         code for each player div in our roster
         {{/each}}
         -->
-  
-      </div>
+
     </div>
   </div>
-
+  </div>
+  <div class="container1">
+    <h1>
+      Benchwarmer Fantasy Football
+    </h1>
+  </div>
 
 </body>
 
