@@ -15,7 +15,7 @@ $(document).ready(function() {
       var interceptions = $("<td>");
       var add = $("<td>");
       var btn = $("<button>");
-      btn.addClass("add btn");
+      btn.addClass("add btn btn-dark");
       btn.attr({
         "data-player": player.FirstName + " " + player.LastName,
         "data-position": player.Position,

@@ -1,0 +1,28 @@
+{{#if user}}
+{{> nav login=true}}
+
+<div class="container">
+    <div class="card">
+        <div class="card-body">
+            <h1 class="card-title">
+                Welcome {{user.username}}
+            </h1>
+            {{#if user.teamName}}
+            <p class="card-text">{{user.teamName}}</p>
+            <button class="btn btn-dark" id="nameChange">New Team Name</button>
+            {{else}}
+            <button class="btn btn-dark" id="nameChange">Make a Team Name</button>
+            {{/if}}
+        </div>
+    </div>
+</div>
+{{else}}
+{{> nav login=false}}
+<div class="container">
+    <div class="card">
+        <div class="card-body">
+            <h1 class="card-text">You need to be Logged in!</h1>
+        </div>
+    </div>
+</div>
+{{/if}}
