@@ -25,6 +25,28 @@ body {
   margin-top: 1em;
 }
 
+<<<<<<< HEAD
+h1{
+  line-height: 3.0;
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 80px;
+  text-align: center;
+  color: black
+  
+}
+#seasonFormSelect {
+ 
+  margin-right: 0.5em;
+}
+
+#positionFormSelect {
+  margin-right: 0.5em;
+} 
+
+.selector {
+  align-content: right;
+}
+=======
 .signup {
   background-color: rgba(255,255,255,0.6);
   padding: 1em;
@@ -32,3 +54,4 @@ body {
   margin-top: 2em;
 }
 
+>>>>>>> master
