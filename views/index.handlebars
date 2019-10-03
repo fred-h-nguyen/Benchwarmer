@@ -1,48 +1,50 @@
-<div id="home">
-
-  <!--navbar conaining a drop down login button thing that will make a post to log user in
+<!--navbar conaining a drop down login button thing that will make a post to log user in
   inside the login dropdown feature will have a if you dont have an accout signup here which will take us to the signup page-->
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary" "justify-content-end">
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01"
-      aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-      <a class="navbar-brand" href="#">Sign Up</a>
-      <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-        <li class="nav-item active">
-          <a class="nav-link" href="#">Log-on</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Home</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Disabled</a>
-        </li>
-      </ul>
-    </div>
-  </nav>
-  </div>
-
-
-  <div class="container">
-    <div class="row">
-      <!-- a different bar with drop down menus for position, season, a searchbar for names, another drop 
+{{#if user}}
+{{> nav login=true}}
+{{else}}
+{{> nav login=false}}
+{{/if}}
+<div class="container">
+  <div class="row">
+    <!-- a different bar with drop down menus for position, season, a searchbar for names, another drop 
       down menu for something-->
 
-      <!--div that will house a table of players that was searched-->
-
-
-
-      <!--div that will house our roster table
-      use of handlebars in this div
-      {{#each player}}
-      code for each player div in our roster
-      {{/each}}
-      -->
-
-    </div>
+    <!--div that will house a table of players that was searched-->
+    {{#if roster}}
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Player</th>
+          <th scope="col">Position</th>
+          <th scope="col">Games Played</th>
+          <th scope="col">Pass Yards</th>
+          <th scope="col">QB rating</th>
+          <th scope="col">Rush Yards</th>
+          <th scope="col">Receptions</th>
+          <th scope="col">Tackle Solo</th>
+          <th scope="col">Interceptions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each roster}}
+        <tr>{{this.PlayerName}}</tr>
+        <tr>{{this.Position}}</tr>
+        <tr>{{this.GamesPlayed}}</tr>
+        <tr>{{this.PassYards}}</tr>
+        <tr>{{this.QBRating}}</tr>
+        <tr>{{this.RushYards}}</tr>
+        <tr>{{this.Receptions}}</tr>
+        <tr>{{this.TackleSolo}}</tr>
+        <tr>{{this.Interceptions}}</tr>
+        {{/each}}
+      </tbody>
+    </table>
+    {{else}}
+    <h1>You need to log in!</h1>
+    {{/if}}
   </div>
+</div>
 </div>
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>

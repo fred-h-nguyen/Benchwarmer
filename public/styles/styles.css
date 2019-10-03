@@ -6,11 +6,12 @@ body {
   background-size: 100%;
 }
 
-  .nav-link {
+.nav-link {
   
   color: #f2f2f2;
  
 }
+
 .nav {
   text-align: end;
 }
@@ -24,7 +25,8 @@ body {
   margin-top: 1em;
 }
 
-H1{
+<<<<<<< HEAD
+h1{
   line-height: 3.0;
   font-family: 'Times New Roman', Times, serif;
   font-size: 80px;
@@ -44,3 +46,12 @@ H1{
 .selector {
   align-content: right;
 }
+=======
+.signup {
+  background-color: rgba(255,255,255,0.6);
+  padding: 1em;
+  width: 100%;
+  margin-top: 2em;
+}
+
+>>>>>>> master
