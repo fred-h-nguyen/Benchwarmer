@@ -7,39 +7,120 @@
 {{/if}}
 <div class="container">
   <div class="row">
-    <!-- a different bar with drop down menus for position, season, a searchbar for names, another drop 
-      down menu for something-->
+    <nav class="navbar navbar-light bg-dark" id="nav-bar">
+      <form class="form-inline">
 
-    <!--div that will house a table of players that was searched-->
-    {{#if roster}}
-    <table class="table">
-      <thead>
+        <input class="form-control mr-sm-2" id="playerSearch" type="search" placeholder="Search Players" aria-label="Search">
+        <div class="selector">
+
+          <ul class="nav">
+            <li>
+              <div class="form-group" id="seasonSelect">
+
+                <select class="form-control">
+                  <option value="current">season</option>
+                  <option value="current">2019</option>
+                  <option value="2018-regular">2018</option>
+                  <option value="2017-regular">2017</option>
+                  <option value="2016-regular">2016</option>
+
+                </select>
+              </div>
+            </li>
+            <li>
+              <div class="form-group" id="positionSelect">
+
+                <select class="form-control">
+                  <option value="">Player Postion</option>
+                  <option value="qb">QB</option>
+                  <option value="rb">RB</option>
+                  <option value="wr">WR</option>
+                  <option value="te">TE</option>
+                  <option value="cb">CB</option>
+                  <option value="lb">LB</option>
+                  <option value="ss">SS</option>
+                </select>
+              </div>
+            </li>
+            <li>
+              <div class="form-group" id="statSelect">
+                <select class="form-control">
+                  <option value="">Sort by Stat</option>
+                  <option value="Passing-Yds.D">Pass Yards</option>
+                  <option value="Rushing-Yds.D">Rushing Yards</option>
+                  <option value="Receiving-Rec.D">Receptions</option>
+                  <option value="Tackles-Solo.D">Tackle Solo</option>
+                  <option value="Interceptions-Int.D">Interceptions</option>
+                </select>
+              </div>
+            </li>
+            <li class="nav-item submitBtn">
+              <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </li>
+          </ul>
+        </div>
+      </form>
+    </nav>
+  </div>
+  <div class="row" id="suggestionView">
+
+    <table class="table table-sm table-striped table-bordered table-light">
+      <thead class="thead-dark">
         <tr>
           <th scope="col">Player</th>
           <th scope="col">Position</th>
           <th scope="col">Games Played</th>
           <th scope="col">Pass Yards</th>
-          <th scope="col">QB rating</th>
           <th scope="col">Rush Yards</th>
           <th scope="col">Receptions</th>
           <th scope="col">Tackle Solo</th>
           <th scope="col">Interceptions</th>
+          <th scope="col">Add</th>
         </tr>
       </thead>
-      <tbody>
+      <tbody id="suggestTable">
+      </tbody>
+    </table>
+
+  </div>
+  <div class="row">
+    <!-- a different bar with drop down menus for position, season, a searchbar for names, another drop 
+      down menu for something-->
+    <!--div that will house a table of players that was searched-->
+    {{#if user}}
+    {{#if roster}}
+    <h2>{{user.teamName}}</h2>
+    <table class="table table-sm table-striped table-bordered table-light">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">Player</th>
+          <th scope="col">Position</th>
+          <th scope="col">Games Played</th>
+          <th scope="col">Pass Yards</th>
+          <th scope="col">Rush Yards</th>
+          <th scope="col">Receptions</th>
+          <th scope="col">Tackle Solo</th>
+          <th scope="col">Interceptions</th>
+          <th scope="col">Delete</th>
+        </tr>
+      </thead>
+      <tbody id={{user.teamName}}>
         {{#each roster}}
         <tr>{{this.PlayerName}}</tr>
         <tr>{{this.Position}}</tr>
         <tr>{{this.GamesPlayed}}</tr>
         <tr>{{this.PassYards}}</tr>
-        <tr>{{this.QBRating}}</tr>
         <tr>{{this.RushYards}}</tr>
         <tr>{{this.Receptions}}</tr>
         <tr>{{this.TackleSolo}}</tr>
         <tr>{{this.Interceptions}}</tr>
+        <tr><button class="btn deletebtn" data-id={{this.id}}>Delete</button></tr>
         {{/each}}
       </tbody>
     </table>
+    {{else}}
+    <h1>No Team Roster!</h1>
+    {{/if}}
     {{else}}
     <h1>You need to log in!</h1>
     {{/if}}

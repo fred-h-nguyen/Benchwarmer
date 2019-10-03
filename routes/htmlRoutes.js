@@ -28,13 +28,10 @@ module.exports = function(app) {
   });
 
   // Load example page and pass in an example by id
-  app.get("/roster", function(req, res) {
-    var logged = req.user;
-    db.fbRoster.findAll({}).then(function(roster) {
-      res.render("index", {
-        logged: logged,
-        roster: roster
-      });
+  app.get("/profile", function(req, res) {
+    var user = req.user;
+    res.render("profile", {
+      user: user
     });
   });
 

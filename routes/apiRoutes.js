@@ -77,74 +77,66 @@ module.exports = function(app) {
     //after the .then res.render to page where table query will show
     //Updated data pull from mySportsFeeds.com:
 
-    var season = req.query.season;
-    var position = req.query.position;
-
-    function playerPull(season, position) {
+    function playerPull(season, position, stat) {
       msf
         .getData("nfl", season, "cumulative_player_stats", "json", {
           limit: "15",
           position: position,
-          force: true
+          force: true,
+          sort: "stats." + stat
         })
         .then(function(response) {
           var playerData = response.cumulativeplayerstats.playerstatsentry;
-          console.log(playerData);
-          return playerData;
+          //console.log(playerData);
+          res.json(playerData);
         });
     }
-
-    res.send(playerPull(season, position));
+    playerPull("current", "qb", "Passing-Yds.D");
   });
 
   //get call for query where axios will make call based on user query
   app.get("/api/players", function(req, res) {
     //axios call here for the query
     //.then empty the div with player suggestions and now append searched players
-    //var playername = req.query.playername
     var season = req.query.season;
     var position = req.query.position;
     var playerName = req.query.playerName;
+    var stat = req.query.stat;
     playerName = playerName.replace(/ /g, "-");
-
-    function playerPull(season, position) {
+    console.log(req.query);
+    function playerPull(season, position, stat) {
       msf
         .getData("nfl", season, "cumulative_player_stats", "json", {
           limit: "15",
           position: position,
-          force: true
+          force: true,
+          sort: "stats." + stat
         })
         .then(function(response) {
           var playerData = response.cumulativeplayerstats.playerstatsentry;
-          console.log(playerData);
-          return playerData;
+          //console.log(playerData);
+          res.json(playerData);
         });
     }
 
     function playerSpecific(player) {
       msf
-        .getData(
-          "nfl",
-          season || "current",
-          "cumulative_player_stats",
-          "json",
-          {
-            limit: "15",
-            player: player,
-            force: true
-          }
-        )
+        .getData("nfl", season, "cumulative_player_stats", "json", {
+          limit: "15",
+          player: player,
+          force: true
+        })
         .then(function(response) {
           var playerData = response.cumulativeplayerstats.playerstatsentry;
-          console.log(playerData);
-          return playerData;
+          //console.log(playerData);
+          res.json(playerData);
         });
     }
 
     if (playerName) {
-      res.send(playerSpecific(playerName));
+      playerSpecific(playerName);
     } else {
-      res.send(playerPull(season, position));
+      playerPull(season, position, stat);
     }
   });
 };

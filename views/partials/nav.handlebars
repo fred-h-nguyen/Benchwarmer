@@ -1,7 +1,12 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container-fluid">
     <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-      <button class="btn"><i class="fa fa-home"></i></button>
+      <a href="/"><button class="btn btn-outline-secondary"><i class="fa fa-home"></i></button></a>
+      <ul class="nav navbar-nav">
+        <li class="nav-item">
+          <a href="/profile">Profile</a>
+        </li>
+      </ul>
       <ul class="nav navbar-nav flex-row justify-content-between ml-auto">
         {{#if login}}
         <li>
