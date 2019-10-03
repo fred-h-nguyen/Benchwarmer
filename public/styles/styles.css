@@ -25,7 +25,6 @@ body {
   margin-top: 1em;
 }
 
-<<<<<<< HEAD
 h1{
   line-height: 3.0;
   font-family: 'Times New Roman', Times, serif;
@@ -46,7 +45,6 @@ h1{
 .selector {
   align-content: right;
 }
-=======
 .signup {
   background-color: rgba(255,255,255,0.6);
   padding: 1em;
@@ -54,4 +52,3 @@ h1{
   margin-top: 2em;
 }
 
->>>>>>> master
