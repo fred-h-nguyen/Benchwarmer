@@ -13,38 +13,49 @@
         <input class="form-control mr-sm-2" type="search" placeholder="Search Players" aria-label="Search">
         <div class="selector">
 
-          <ul class="nav nav-right">
+          <ul class="nav">
             <li>
-              <div class="form-group" id="seasonFormSelect">
+              <div class="form-group" id="seasonSelect">
 
                 <select class="form-control">
                   <option>season</option>
-                  <option>2019</option>
-                  <option>2018</option>
-                  <option>2017</option>
+                  <option value="current">2019</option>
+                  <option value="2018-regular">2018</option>
+                  <option value="2017-regular">2017</option>
+                  <option value="2016-regular">2016</option>
 
                 </select>
               </div>
             </li>
             <li>
-              <div class="form-group" id="positionFormSelect">
+              <div class="form-group" id="positionSelect">
 
                 <select class="form-control">
                   <option>Player Postion</option>
-                  <option>QB</option>
-                  <option>RB</option>
-                  <option>WR</option>
-                  <option>TE</option>
-                  <option>CB</option>
-                  <option>LB</option>
-                  <option>SS</option>
+                  <option value="qb">QB</option>
+                  <option value="rb">RB</option>
+                  <option value="wr">WR</option>
+                  <option value="te">TE</option>
+                  <option value="cb">CB</option>
+                  <option value="lb">LB</option>
+                  <option value="ss">SS</option>
+                </select>
+              </div>
+            </li>
+            <li>
+              <div class="form-group" id="statSelect">
+                <select class="form-control">
+                  <option value="">Sort by Stat</option>
+                  <option value="Passing-Yds.D">Pass Yards</option>
+                  <option value="Rushing-Yds.D">Rushing Yards</option>
+                  <option value="Receiving-Rec.D">Receptions</option>
+                  <option value="Tackles-Solo.D">Tackle Solo</option>
+                  <option value="Interceptions-Int.D">Interceptions</option>
                 </select>
               </div>
             </li>
             <li class="nav-item submitBtn">
-
               <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-
             </li>
           </ul>
         </div>
@@ -69,7 +80,7 @@
       </thead>
       <tbody id="suggestTable">
       </tbody>
-      </table>
+    </table>
 
   </div>
   <div class="row">
