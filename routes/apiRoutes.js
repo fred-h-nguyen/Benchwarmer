@@ -83,7 +83,7 @@ module.exports = function(app) {
           limit: "15",
           position: position,
           force: true,
-          sort: sort
+          sort: "stats." + sort
         })
         .then(function(response) {
           var playerData = response.cumulativeplayerstats.playerstatsentry;
@@ -91,7 +91,7 @@ module.exports = function(app) {
           res.json(playerData);
         });
     }
-    playerPull("current", "qb", "stats.Passing-Yds.D");
+    playerPull("current", "qb", "Passing-Yds.D");
   });
 
   //get call for query where axios will make call based on user query
@@ -111,7 +111,7 @@ module.exports = function(app) {
           limit: "15",
           position: position,
           force: true,
-          sort: sort
+          sort: "stats." + sort
         })
         .then(function(response) {
           var playerData = response.cumulativeplayerstats.playerstatsentry;
@@ -122,17 +122,11 @@ module.exports = function(app) {
 
     function playerSpecific(player) {
       msf
-        .getData(
-          "nfl",
-          season || "current",
-          "cumulative_player_stats",
-          "json",
-          {
-            limit: "15",
-            player: player,
-            force: true
-          }
-        )
+        .getData("nfl", season, "cumulative_player_stats", "json", {
+          limit: "15",
+          player: player,
+          force: true
+        })
         .then(function(response) {
           var playerData = response.cumulativeplayerstats.playerstatsentry;
           console.log(playerData);
