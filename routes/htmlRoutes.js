@@ -3,11 +3,21 @@ var db = require("../models");
 module.exports = function(app) {
   // Load index page
   app.get("/", function(req, res) {
-    var logged = req.user;
-    console.log(req.user);
-    res.render("index", {
-      logged: logged
-    });
+    var user = req.user;
+    if (user) {
+      db.fbRoster
+        .findAll({ where: { ownerId: user.id } })
+        .then(function(roster) {
+          res.render("index", {
+            user: user,
+            roster: roster
+          });
+        });
+    } else {
+      res.render("index", {
+        user: user
+      });
+    }
   });
 
   //Load signup page
@@ -19,11 +29,11 @@ module.exports = function(app) {
 
   // Load example page and pass in an example by id
   app.get("/roster", function(req, res) {
-    db.Example.findAll({ where: { id: req.params.id } }).then(function(
-      dbExample
-    ) {
-      res.render("example", {
-        example: dbExample
+    var logged = req.user;
+    db.fbRoster.findAll({}).then(function(roster) {
+      res.render("index", {
+        logged: logged,
+        roster: roster
       });
     });
   });
