@@ -10,7 +10,6 @@ module.exports = function(sequelize, Datatypes) {
     },
     GamesPlayed: Datatypes.STRING,
     PassYards: Datatypes.STRING,
-    QBRating: Datatypes.STRING,
     RushYards: Datatypes.STRING,
     Receptions: Datatypes.STRING,
     TackleSolo: Datatypes.STRING,
