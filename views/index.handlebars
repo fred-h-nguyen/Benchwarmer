@@ -10,7 +10,8 @@
     <nav class="navbar navbar-light bg-dark" id="nav-bar">
       <form class="form-inline">
 
-        <input class="form-control mr-sm-2" id="playerSearch" type="search" placeholder="Search Players" aria-label="Search">
+        <input class="form-control mr-sm-2" id="playerSearch" type="search" placeholder="Search Players"
+          aria-label="Search">
         <div class="selector">
 
           <ul class="nav">
@@ -106,15 +107,17 @@
       </thead>
       <tbody id={{user.teamName}}>
         {{#each roster}}
-        <tr>{{this.PlayerName}}</tr>
-        <tr>{{this.Position}}</tr>
-        <tr>{{this.GamesPlayed}}</tr>
-        <tr>{{this.PassYards}}</tr>
-        <tr>{{this.RushYards}}</tr>
-        <tr>{{this.Receptions}}</tr>
-        <tr>{{this.TackleSolo}}</tr>
-        <tr>{{this.Interceptions}}</tr>
-        <tr><button class="btn deletebtn" data-id={{this.id}}>Delete</button></tr>
+        <tr>
+          <td>{{this.PlayerName}}</td>
+          <td>{{this.Position}}</td>
+          <td>{{this.GamesPlayed}}</td>
+          <td>{{this.PassYards}}</td>
+          <td>{{this.RushYards}}</td>
+          <td>{{this.Receptions}}</td>
+          <td>{{this.TackleSolo}}</td>
+          <td>{{this.Interceptions}}</td>
+          <td><button class="btn btn-dark deletebtn" data-id={{this.id}}>Delete</button></td>
+        </tr>
         {{/each}}
       </tbody>
     </table>

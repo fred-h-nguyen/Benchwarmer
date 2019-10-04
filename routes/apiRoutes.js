@@ -44,9 +44,13 @@ module.exports = function(app) {
     });
   });
 
-  // Create a new example
+  // Create a new player
   app.post("/api/roster", function(req, res) {
-    db.fbRoster.create(req.body).then(function(player) {
+    var user = req.user;
+    var player = req.body;
+    player.ownerID = user.id;
+    console.log(player);
+    db.fbRoster.create(player).then(function(player) {
       res.json(player);
     });
   });

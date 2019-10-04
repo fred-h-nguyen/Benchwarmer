@@ -1,6 +1,6 @@
 $(document).ready(function() {
-  var tbody = $("#suggestTable");
   function renderTable(data) {
+    var tbody = $("#suggestTable");
     tbody.empty();
     for (var i = 0; i < data.length; i++) {
       var player = data[i].player;
@@ -107,6 +107,22 @@ $(document).ready(function() {
     $.ajax({ url: url, method: "GET" }).then(function(data) {
       console.log(data);
       renderTable(data);
+    });
+  });
+
+  $(document).on("click", ".add", function() {
+    var player = {
+      PlayerName: $(this).data("player"),
+      Position: $(this).data("position"),
+      GamesPlayed: $(this).data("games"),
+      PassYards: $(this).data("passyds"),
+      RushYards: $(this).data("rushyds"),
+      Receptions: $(this).data("receptions"),
+      TackleSolo: $(this).data("tackles"),
+      Interceptions: $(this).data("interceptions")
+    };
+    $.post("/api/roster", player).then(function() {
+      location.reload();
     });
   });
 });
