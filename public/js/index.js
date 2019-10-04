@@ -125,4 +125,12 @@ $(document).ready(function() {
       location.reload();
     });
   });
+
+  $(document).on("click", ".deletebtn", function() {
+    console.log($(this).data("id"));
+    var url = "/api/roster/" + $(this).data("id");
+    $.ajax({ url: url, method: "DELETE" }).then(function() {
+      location.reload();
+    });
+  });
 });
