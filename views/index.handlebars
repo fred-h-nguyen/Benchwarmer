@@ -5,6 +5,7 @@
 {{else}}
 {{> nav login=false}}
 {{/if}}
+
 <div class="container">
   <div class="row">
     <nav class="navbar navbar-light bg-dark" id="nav-bar">
@@ -80,17 +81,19 @@
         </tr>
       </thead>
       <tbody id="suggestTable">
+        {{#each playerData}}
+        <tr id={{@index}}>
+          {{>table}}
+        </tr>
+        {{/each}}
       </tbody>
     </table>
 
   </div>
-  <div class="row">
+  <div class="row" id="userTableView">
     <!-- a different bar with drop down menus for position, season, a searchbar for names, another drop 
       down menu for something-->
     <!--div that will house a table of players that was searched-->
-    {{#if user}}
-    {{#if roster}}
-    <h2>{{user.teamName}}</h2>
     <table class="table table-sm table-striped table-bordered table-light">
       <thead class="thead-dark">
         <tr>
@@ -105,9 +108,9 @@
           <th scope="col">Delete</th>
         </tr>
       </thead>
-      <tbody id={{user.teamName}}>
+      <tbody id="userTable">
         {{#each roster}}
-        <tr>
+        <tr id={{this.id}}>
           <td>{{this.PlayerName}}</td>
           <td>{{this.Position}}</td>
           <td>{{this.GamesPlayed}}</td>
@@ -121,15 +124,9 @@
         {{/each}}
       </tbody>
     </table>
-    {{else}}
-    <h1>No Team Roster!</h1>
-    {{/if}}
-    {{else}}
-    <h1>You need to log in!</h1>
-    {{/if}}
   </div>
 </div>
-</div>
+
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="/js/index.js"></script>
