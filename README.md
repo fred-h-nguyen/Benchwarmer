@@ -18,12 +18,17 @@
 * Node.js
 * MySQL
 * Sequelize
+* Passport
+* Express-Handlebars
 
 ## APIs used
 
-* sports api1
-* sports api 2???
+* MySportsFeeds
 
 ## Tasks
 
-* User will look for player positions
+* User will look at play positions, the season they want, or the specific stats they want and will receive a table of players to draft from.
+
+* When the User adds the player , the player will show up in the user's personal roster table at the bottom.
+
+* Users can also remove and replace the players from the database.
