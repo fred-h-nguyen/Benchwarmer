@@ -6,6 +6,7 @@ $(document).ready(function() {
       var player = data[i].player;
       var stat = data[i].stats;
       var tr = $("<tr>");
+      tr.attr("id", i);
       var name = $("<td>");
       var position = $("<td>");
       var games = $("<td>");
@@ -20,7 +21,8 @@ $(document).ready(function() {
       btn.attr({
         "data-player": player.FirstName + " " + player.LastName,
         "data-position": player.Position,
-        "data-games": stat.GamesPlayed["#text"]
+        "data-games": stat.GamesPlayed["#text"],
+        "data-id": i
       });
       name.html(player.FirstName + " " + player.LastName);
       position.html(player.Position);
@@ -77,10 +79,62 @@ $(document).ready(function() {
     }
   }
 
-  $.ajax({ url: "/api/rostersuggestion", method: "GET" }).then(function(data) {
-    console.log(data);
-    renderTable(data);
-  });
+  function renderUserTable(
+    id,
+    player,
+    pos,
+    game,
+    pass,
+    rush,
+    recep,
+    tackle,
+    int
+  ) {
+    var tbody = $("#userTable");
+    var tr = $("<tr>");
+    tr.attr("id", id);
+    var name = $("<td>");
+    var position = $("<td>");
+    var games = $("<td>");
+    var passYds = $("<td>");
+    var rushYds = $("<td>");
+    var receptions = $("<td>");
+    var tackleSolo = $("<td>");
+    var interceptions = $("<td>");
+    var del = $("<td>");
+    var btn = $("<button>");
+    btn.addClass("deletebtn btn btn-dark");
+    btn.attr({
+      "data-id": id
+    });
+    name.html(player);
+    position.html(pos);
+    games.html(game);
+    passYds.html(pass);
+    rushYds.html(rush);
+    receptions.html(recep);
+    tackleSolo.html(tackle);
+    interceptions.html(int);
+    btn.html("Delete");
+    del.append(btn);
+    tr.append(
+      name,
+      position,
+      games,
+      passYds,
+      rushYds,
+      receptions,
+      tackleSolo,
+      interceptions,
+      del
+    );
+    tbody.append(tr);
+  }
+
+  // $.ajax({ url: "/api/rostersuggestion", method: "GET" }).then(function(data) {
+  //   console.log(data);
+  //   renderTable(data);
+  // });
 
   $(".submitBtn").on("click", function(event) {
     event.preventDefault();
@@ -121,16 +175,32 @@ $(document).ready(function() {
       TackleSolo: $(this).data("tackles"),
       Interceptions: $(this).data("interceptions")
     };
-    $.post("/api/roster", player).then(function() {
-      location.reload();
+    $.post("/api/roster", player).then(function(data) {
+      console.log(data);
+      renderUserTable(
+        data.id,
+        data.PlayerName,
+        data.Position,
+        data.GamesPlayed,
+        data.PassYards,
+        data.RushYards,
+        data.Receptions,
+        data.TackleSolo,
+        data.Interceptions
+      );
     });
+    var id = parseInt($(this).data("id"));
+    $("#" + id).remove();
   });
 
   $(document).on("click", ".deletebtn", function() {
     console.log($(this).data("id"));
     var url = "/api/roster/" + $(this).data("id");
-    $.ajax({ url: url, method: "DELETE" }).then(function() {
-      location.reload();
+    var id = $(this).data("id");
+    console.log(id);
+    $.ajax({ url: url, method: "DELETE" }).then(function(data) {
+      console.log(data);
+      $("#" + id).remove();
     });
   });
 });

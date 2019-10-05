@@ -1,0 +1,14 @@
+<td>{{this.player.FirstName}} {{this.player.LastName}}</td>
+<td>{{this.player.Position}}</td>
+<td>{{this.stats.GamesPlayed.[#text]}}</td>
+<td>{{this.stats.PassYards.[#text]}}</td>
+<td>{{this.stats.RushYards.[#text]}}</td>
+<td>{{this.stats.Receptions.[#text]}}</td>
+<td>{{this.stats.TackleSolo.[#text]}}</td>
+<td>{{this.stats.Interceptions.[#text]}}</td>
+
+<td><button class="btn btn-dark add" data-id={{@index}} data-player="{{this.player.FirstName}} {{this.player.LastName}}"
+        data-position={{this.player.Position}} data-games={{this.stats.GamesPlayed.[#text]}}
+        data-passyds={{this.stats.PassYards.[#text]}} data-rushyds={{this.stats.RushYards.[#text]}}
+        data-receptions={{this.stats.Receptions.[#text]}} data-tackles={{this.stats.TackleSolo.[#text]}}
+        data-interceptions={{this.stats.Interceptions.[#text]}}>Add</button></td>
