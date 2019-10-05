@@ -49,9 +49,21 @@ module.exports = function(app) {
   // Load example page and pass in an example by id
   app.get("/profile", function(req, res) {
     var user = req.user;
-    res.render("profile", {
-      user: user
-    });
+
+    if (user) {
+      db.fbRoster
+        .findAll({ where: { ownerId: user.id } })
+        .then(function(roster) {
+          res.render("profile", {
+            user: user,
+            roster: roster
+          });
+        });
+    } else {
+      res.render("profile", {
+        user: user
+      });
+    }
   });
 
   // Render 404 page for any unmatched routes
