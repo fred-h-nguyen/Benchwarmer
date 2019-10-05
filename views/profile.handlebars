@@ -14,6 +14,47 @@
             <button class="btn btn-dark" id="nameChange">Make a Team Name</button>
             {{/if}}
         </div>
+        <div>
+            {{#if user}}
+    {{#if roster}}
+    <h2>{{user.teamName}}</h2>
+    <table class="table table-sm table-striped table-bordered table-light">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">Player</th>
+          <th scope="col">Position</th>
+          <th scope="col">Games Played</th>
+          <th scope="col">Pass Yards</th>
+          <th scope="col">Rush Yards</th>
+          <th scope="col">Receptions</th>
+          <th scope="col">Tackle Solo</th>
+          <th scope="col">Interceptions</th>
+          <th scope="col">Delete</th>
+        </tr>
+      </thead>
+      <tbody id={{user.teamName}}>
+        {{#each roster}}
+        <tr>
+          <td>{{this.PlayerName}}</td>
+          <td>{{this.Position}}</td>
+          <td>{{this.GamesPlayed}}</td>
+          <td>{{this.PassYards}}</td>
+          <td>{{this.RushYards}}</td>
+          <td>{{this.Receptions}}</td>
+          <td>{{this.TackleSolo}}</td>
+          <td>{{this.Interceptions}}</td>
+          <td><button class="btn btn-dark deletebtn" data-id={{this.id}}>Delete</button></td>
+        </tr>
+        {{/each}}
+      </tbody>
+    </table>
+    {{else}}
+    <h1>No Team Roster!</h1>
+    {{/if}}
+    {{else}}
+    <h1>You need to log in!</h1>
+    {{/if}}
+        </div>
     </div>
 </div>
 {{else}}
@@ -26,3 +67,6 @@
     </div>
 </div>
 {{/if}}
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="/js/index.js"></script>
